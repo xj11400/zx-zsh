@@ -1,0 +1,365 @@
+# version: 1.0.0
+# document: https://starship.rs/config/
+# https://starship.rs/presets/jetpack
+# https://starship.rs/presets/pure-preset
+
+# place this line at the top of the file
+# palette = 'zx'
+# then, this `palettes` entry can go at the bottom of the TOML file
+# [palettes.zx]
+#
+
+add_newline = true
+continuation_prompt = '[∙](dimmed white)'
+# command_timeout = 1000
+
+format = """
+$sudo\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$character"""
+
+# $line_break\
+# $fill\
+# $shlvl\
+# $shell\
+# $env_var\
+# $jobs\
+# $localip\
+# $battery\
+
+right_format = """
+$nix_shell\
+$container\
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$crystal\
+$custom\
+$status\
+$os\
+$cmd_duration"""
+
+[fill]
+symbol = ' '
+
+[character]
+format = '$symbol '
+success_symbol = '[❯](bold 244)'
+error_symbol = '[❯](red)'
+vimcmd_symbol = '[❮](italic dimmed green)'
+# not supported in zsh
+vimcmd_replace_one_symbol = '◌'
+vimcmd_replace_symbol = '□'
+vimcmd_visual_symbol = '▼'
+
+[env_var.VIMSHELL]
+format = '[$env_value]($style)'
+style = 'green italic'
+
+[sudo]
+format = '[$symbol]($style)'
+style = 'bold italic bright-purple'
+symbol = '⋈┈'
+disabled = false
+
+[username]
+style_user = 'bright-yellow bold italic'
+style_root = 'purple bold italic'
+format = '[⭘ $user]($style) '
+disabled = false
+show_always = false
+
+[directory]
+# home_symbol = '~'
+truncation_length = 1
+# truncation_symbol = '□ '
+# read_only = ' ◈'
+use_os_path_sep = true
+style = 'blue'
+format = '[$path]($style)[$read_only]($read_only_style) '
+repo_root_style = 'bold blue'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
+
+[cmd_duration]
+format = ' [$duration ](italic dimmed black)'
+
+[jobs]
+format = '[$symbol$number]($style) '
+style = 'white'
+symbol = '[▶](blue italic)'
+
+[localip]
+ssh_only = true
+format = ' ◯[$localipv4](bold magenta)'
+disabled = false
+
+[time]
+disabled = false
+format = '[ $time]($style)'
+time_format = '%R'
+utc_time_offset = 'local'
+style = 'italic dimmed white'
+
+[battery]
+format = '[ $percentage $symbol]($style)'
+full_symbol = '█'
+charging_symbol = '[↑](italic bold green)'
+discharging_symbol = '↓'
+unknown_symbol = '░'
+empty_symbol = '▃'
+
+[[battery.display]]
+threshold = 20
+style = 'italic bold red'
+
+[[battery.display]]
+threshold = 60
+style = 'italic dimmed bright-purple'
+
+[[battery.display]]
+threshold = 70
+style = 'italic dimmed yellow'
+
+[memory_usage]
+symbol = '▪▫▪ '
+format = ' mem [${ram}( ${swap})]($style)'
+
+#
+# Git
+#
+
+[git_branch]
+format = '[$branch(:$remote_branch)]($style)'
+style = 'italic 243'
+# truncation_symbol = '⋯'
+# truncation_length = 11
+# ignore_branches = ['main', 'master']
+# only_attached = true
+
+[git_commit]
+format = '[\($hash$tag\)]($style) '
+style = 'italic 243'
+commit_hash_length = 4
+tag_symbol = '#'
+
+[git_metrics]
+format = '([▴$added]($added_style))([▿$deleted]($deleted_style))'
+added_style = 'italic dimmed green'
+deleted_style = 'italic dimmed red'
+ignore_submodules = true
+disabled = false
+
+[git_status]
+format = '[[($conflicted$untracked$modified$staged$renamed$deleted$stashed)](241) ($ahead_behind) ]($style)'
+style = '241'
+conflicted = '!'
+untracked = ''
+modified = '*'
+staged = "'"
+renamed = ''
+deleted = ''
+stashed = ''
+ahead = '⇡'
+diverged = '⇡${ahead_count}⇣${behind_count}'
+behind = '⇣'
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = 'bright-black'
+
+#
+# Languages
+#
+
+[package]
+symbol = 'pkg'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[deno]
+symbol = 'deno'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[bun]
+symbol = 'bun'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[lua]
+symbol = 'lua'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[nodejs]
+symbol = 'node'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+detect_files = ['package.json', '.node-version', '!bunfig.toml', '!bun.lockb']
+detect_folders = ['node_modules']
+detect_extensions = []
+
+[python]
+symbol = 'py'
+format = '[${symbol}]($style) [(${version})(\(${virtualenv}\))](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[rust]
+symbol = 'rs'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[c]
+symbol = 'c'
+format = '[$symbol]($style) [$version(-$name)](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[cmake]
+symbol = 'cmake'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[dart]
+symbol = 'dart'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[docker_context]
+symbol = 'docker'
+format = '[$symbol]($style) [$context](italic 240) '
+style = 'bold 244'
+
+[golang]
+symbol = 'go'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[java]
+symbol = 'java'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[gradle]
+symbol = 'gradle'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[nix_shell]
+symbol = 'nix'
+format = '[$symbol $state]($style) [$name](italic 240) '
+style = 'bold 244'
+impure_msg = '[impure shell](dimmed red)'
+pure_msg = '[pure shell](dimmed green)'
+unknown_msg = '[unknown shell](dimmed yellow)'
+heuristic = true
+
+[ruby]
+symbol = 'ruby'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[swift]
+symbol = 'swift'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[aws]
+symbol = 'aws'
+disabled = true
+format = '[$symbol]($style) [$profile $region](italic 240) '
+style = 'bold 244'
+
+[nim]
+symbol = 'nim'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[elixir]
+symbol = 'exs'
+format = '[$symbol]($style) [$version OTP $otp_version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
+[haskell]
+symbol = 'hs'
+format = '[$symbol]($style) [$version](italic 240) '
+version_format = '${raw}'
+style = 'bold 244'
+
