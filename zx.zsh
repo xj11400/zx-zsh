@@ -23,6 +23,8 @@ zstyle -a ':zx:load' plugins '_zx_plugins' ||
     prompt
     utility
     color
+    loader
+    # helper
   )
 
 # local -a _zx_load_dir
@@ -59,7 +61,6 @@ ZX_HOME=${0:a:h}
 # basic
 source $ZX_HOME/lib/env.zsh
 source $ZX_HOME/lib/basic.zsh
-source $ZX_HOME/lib/load.zsh
 
 # autoload functions
 fpath=(
@@ -106,10 +107,6 @@ done
 # ┌──────────────────────────────────────────────────────────┐
 #   load directory
 # └──────────────────────────────────────────────────────────┘
-
-# programs
-# zstyle ':zx:load' programs true
-zstyle -t ':zx:load' programs && __zx_load_conf_dir "$ZX_HOME/programs"
 
 # user config directories
 # zstyle ':zx:load' user-confd <user config dirs>
